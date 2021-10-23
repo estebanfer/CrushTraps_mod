@@ -58,7 +58,7 @@ set_callback(function()
         local max_x = state.width*10+2
         local max_y = state.height*8+90
         for i=1, state.width*state.height/options.e_safe_zone_divisor do
-            zones[i] = {['x'] = prng:random_int(2, max_x, PRNG_CLASS.PARTICLES), ['y'] = prng:random_int(90, max_y, PRNG_CLASS.PARTICLES)}--math.random(2, state.width*10+2), ['y'] = math.random(90, state.height*8+90)}
+            zones[i] = {['x'] = prng:random_int(2, max_x, PRNG_CLASS.PROCEDURAL_SPAWNS), ['y'] = prng:random_int(90, max_y, PRNG_CLASS.PROCEDURAL_SPAWNS)}--math.random(2, state.width*10+2), ['y'] = math.random(90, state.height*8+90)}
             --messpect(zones[i].x, zones[i].y)
         end
     end
@@ -72,9 +72,9 @@ set_callback(function()
     for _,uid in ipairs(floors) do
         local ent = get_entity(uid)
         local x, y, l = get_position(uid)
-        if prng:random_float(PRNG_CLASS.PARTICLES) < spawn_chance and valid_crushblock_spawn(ent, uid, x, y, radius) then
+        if prng:random_float(PRNG_CLASS.PROCEDURAL_SPAWNS) < spawn_chance and valid_crushblock_spawn(ent, uid, x, y, radius) then
             if not (used[x] and used[x][y]) then
-                if prng:random_float(PRNG_CLASS.PARTICLES) < large_spawn_chance then
+                if prng:random_float(PRNG_CLASS.PROCEDURAL_SPAWNS) < large_spawn_chance then
                     local right_uid = get_grid_entity_at(x+1, y, l)
                     local down_uid =  get_grid_entity_at(x, y-1, l)
                     local down_right_uid = get_grid_entity_at(x+1, y-1, l)
